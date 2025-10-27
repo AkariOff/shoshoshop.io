@@ -3,25 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Каталог одежды и аксессуаров</title>
+    <title>Каталог товаров - FashionStore</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🛍️ Каталог товаров</h1>
-            <p>Одежда и аксессуары по выгодным ценам</p>
-            <a href="index.html" class="back-link">← На главную</a>
+            <h1>🛍️ Каталог Товаров</h1>
+            <p>Подберите идеальный образ из нашей эксклюзивной коллекции</p>
+            <a href="index.html" class="back-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                На главную
+            </a>
         </div>
 
         <div class="categories">
-            <button class="category-btn active" onclick="showCategory('all')">Все товары</button>
-            <button class="category-btn" onclick="showCategory('clothing')">👕 Одежда</button>
-            <button class="category-btn" onclick="showCategory('accessories')">💍 Аксессуары</button>
+            <button class="category-btn active" onclick="showCategory('all')">
+                <span>🔥 Все товары</span>
+            </button>
+            <button class="category-btn" onclick="showCategory('clothing')">
+                <span>👕 Одежда</span>
+            </button>
+            <button class="category-btn" onclick="showCategory('accessories')">
+                <span>💍 Аксессуары</span>
+            </button>
         </div>
 
         <div id="products-container" class="products-grid">
             <!-- Товары будут добавляться через JavaScript -->
+        </div>
+
+        <div class="footer">
+            <p>© 2024 FashionStore. Все права защищены</p>
         </div>
     </div>
 
