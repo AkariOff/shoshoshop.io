@@ -1,0 +1,21 @@
+/* Добавьте эти стили в существующий CSS файл */
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background-color: #f8f9fa;
+    padding: 10px;
+}
+
+/* Улучшенная обработка ошибок загрузки изображений */
+.product-image:before {
+    content: "Изображение товара";
+    display: block;
+    text-align: center;
+    line-height: 180px;
+    color: #6c757d;
+    font-size: 14px;
+}
