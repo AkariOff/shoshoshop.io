@@ -18,4 +18,4 @@
 
 ## Демо
 
-Сайт доступен по адресу: https://username.github.io
+Сайт доступен по адресу: shoshoshop.io
