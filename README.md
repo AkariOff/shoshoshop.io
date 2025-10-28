@@ -18,4 +18,4 @@
 
 ## Демо
 
-Сайт доступен по адресу: shoshoshop.io
+Сайт доступен по адресу: https://akarioff.github.io/shoshoshop.io/
