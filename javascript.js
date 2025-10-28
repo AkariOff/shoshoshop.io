@@ -5,7 +5,7 @@ const products = [
         name: "Футболка Premium Cotton",
         price: 1299,
         description: "Мягкая хлопковая футболка премиум-качества. Идеальна для повседневной носки и создания стильных образов.",
-        image: "футболка.jpg",
+        image: "https://via.placeholder.com/400x400/6366f1/ffffff?text=Футболка+Premium",
         category: "clothing",
         sizes: ["S", "M", "L", "XL"],
         badge: "Хит продаж"
@@ -15,7 +15,7 @@ const products = [
         name: "Худи Comfort Fit",
         price: 3499,
         description: "Теплое и уютное худи с современным кроем. Отлично сочетается с джинсами и спортивной обувью.",
-        image: "худи.jpg",
+        image: "https://via.placeholder.com/400x400/ec4899/ffffff?text=Худи+Comfort",
         category: "clothing",
         sizes: ["S", "M", "L", "XL"],
         badge: "Новинка"
@@ -25,7 +25,7 @@ const products = [
         name: "Часы Chrono Sport",
         price: 4599,
         description: "Стильные спортивные часы с водонепроницаемостью 100м. Хронограф и календарь в одном дизайне.",
-        image: "часы.jpg",
+        image: "https://via.placeholder.com/400x400/10b981/ffffff?text=Часы+Sport",
         category: "accessories",
         badge: "Эксклюзив"
     },
@@ -34,7 +34,7 @@ const products = [
         name: "Футболка Essential",
         price: 999,
         description: "Базовая футболка отличного качества. Универсальный вариант для любого гардероба.",
-        image: "футболка.jpg",
+        image: "https://via.placeholder.com/400x400/6366f1/ffffff?text=Футболка+Basic",
         category: "clothing",
         sizes: ["S", "M", "L"]
     },
@@ -43,7 +43,7 @@ const products = [
         name: "Худи Oversize",
         price: 3799,
         description: "Модное худи оверсайз кроя. Создает расслабленный и стильный look в любых ситуациях.",
-        image: "худи.jpg",
+        image: "https://via.placeholder.com/400x400/ec4899/ffffff?text=Худи+Oversize",
         category: "clothing",
         sizes: ["M", "L", "XL"],
         badge: "Тренд"
@@ -53,9 +53,65 @@ const products = [
         name: "Часы Elegance Pro",
         price: 5299,
         description: "Элегантные классические часы с сапфировым стеклом. Подчеркнут ваш стиль в деловой обстановке.",
-        image: "часы.jpg",
+        image: "https://via.placeholder.com/400x400/10b981/ffffff?text=Часы+Elegance",
         category: "accessories",
         badge: "Премиум"
+    },
+    {
+        id: 7,
+        name: "Шорты Urban Style",
+        price: 2199,
+        description: "Стильные шорты для городского образа жизни. Комфортные и практичные для теплой погоды.",
+        image: "https://via.placeholder.com/400x400/f59e0b/ffffff?text=Шорты+Urban",
+        category: "clothing",
+        sizes: ["S", "M", "L", "XL"],
+        badge: "Лето 2024"
+    },
+    {
+        id: 8,
+        name: "Браслет Minimalist",
+        price: 899,
+        description: "Элегантный минималистичный браслет из нержавеющей стали. Подходит для ежедневной носки.",
+        image: "https://via.placeholder.com/400x400/8b5cf6/ffffff?text=Браслет+Minimal",
+        category: "accessories"
+    },
+    {
+        id: 9,
+        name: "Футболка Graphic Print",
+        price: 1599,
+        description: "Футболка с уникальным графическим принтом. Выразите свой стиль через искусство.",
+        image: "https://via.placeholder.com/400x400/6366f1/ffffff?text=Футболка+Graphic",
+        category: "clothing",
+        sizes: ["S", "M", "L", "XL"],
+        badge: "Арт-коллекция"
+    },
+    {
+        id: 10,
+        name: "Цепочка Silver Line",
+        price: 1899,
+        description: "Стильная серебряная цепочка с современным дизайном. Идеальное дополнение к любому образу.",
+        image: "https://via.placeholder.com/400x400/6b7280/ffffff?text=Цепочка+Silver",
+        category: "accessories",
+        badge: "Бестселлер"
+    },
+    {
+        id: 11,
+        name: "Худи Tech Fleece",
+        price: 4299,
+        description: "Инновационное худи из технологичного флиса. Легкое, теплое и стильное.",
+        image: "https://via.placeholder.com/400x400/ec4899/ffffff?text=Худи+Tech",
+        category: "clothing",
+        sizes: ["S", "M", "L", "XL"],
+        badge: "Технологии"
+    },
+    {
+        id: 12,
+        name: "Набор браслетов Modern",
+        price: 1299,
+        description: "Набор из трех стильных браслетов для создания многослойного образа.",
+        image: "https://via.placeholder.com/400x400/8b5cf6/ffffff?text=Браслеты+Set",
+        category: "accessories",
+        badge: "Комплект"
     }
 ];
 
@@ -86,7 +142,7 @@ function displayProducts(productsToShow = products) {
                 ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
             </div>
             <div class="product-name">${product.name}</div>
-            <div class="product-price">${product.price}</div>
+            <div class="product-price">${product.price.toLocaleString()} ₽</div>
             <div class="product-description">${product.description}</div>
             ${product.sizes ? `
                 <div class="product-sizes">
