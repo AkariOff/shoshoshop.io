@@ -1,11 +1,11 @@
-// Данные товаров с улучшенными описаниями
+// Данные товаров
 const products = [
     {
         id: 1,
         name: "Футболка Premium Cotton",
         price: 1299,
-        description: "Мягкая хлопковая футболка премиум-качества. Идеальна для повседневной носки и создания стильных образов.",
-        image: "https://via.placeholder.com/400x400/6366f1/ffffff?text=Футболка+Premium",
+        description: "Мягкая хлопковая футболка премиум-качества. Идеальна для повседневной носки.",
+        image: "img/футболка.jpg",
         category: "clothing",
         sizes: ["S", "M", "L", "XL"],
         badge: "Хит продаж"
@@ -14,8 +14,8 @@ const products = [
         id: 2,
         name: "Худи Comfort Fit",
         price: 3499,
-        description: "Теплое и уютное худи с современным кроем. Отлично сочетается с джинсами и спортивной обувью.",
-        image: "https://via.placeholder.com/400x400/ec4899/ffffff?text=Худи+Comfort",
+        description: "Теплое и уютное худи с современным кроем. Отлично сочетается с джинсами.",
+        image: "img/худи.jpg",
         category: "clothing",
         sizes: ["S", "M", "L", "XL"],
         badge: "Новинка"
@@ -24,96 +24,63 @@ const products = [
         id: 3,
         name: "Часы Chrono Sport",
         price: 4599,
-        description: "Стильные спортивные часы с водонепроницаемостью 100м. Хронограф и календарь в одном дизайне.",
-        image: "https://via.placeholder.com/400x400/10b981/ffffff?text=Часы+Sport",
+        description: "Стильные спортивные часы с водонепроницаемостью 100м. Хронограф и календарь.",
+        image: "img/часы.jpg",
         category: "accessories",
         badge: "Эксклюзив"
     },
     {
         id: 4,
-        name: "Футболка Essential",
-        price: 999,
-        description: "Базовая футболка отличного качества. Универсальный вариант для любого гардероба.",
-        image: "https://via.placeholder.com/400x400/6366f1/ffffff?text=Футболка+Basic",
-        category: "clothing",
-        sizes: ["S", "M", "L"]
+        name: "Кроссовки Urban Style",
+        price: 5299,
+        description: "Стильные городские кроссовки с амортизацией. Комфорт на весь день.",
+        image: "img/кроссовки.jpg",
+        category: "shoes",
+        sizes: ["38", "39", "40", "41", "42", "43"],
+        badge: "Популярное"
     },
     {
         id: 5,
-        name: "Худи Oversize",
-        price: 3799,
-        description: "Модное худи оверсайз кроя. Создает расслабленный и стильный look в любых ситуациях.",
-        image: "https://via.placeholder.com/400x400/ec4899/ffffff?text=Худи+Oversize",
-        category: "clothing",
-        sizes: ["M", "L", "XL"],
-        badge: "Тренд"
+        name: "Кожаная сумка",
+        price: 3899,
+        description: "Элегантная кожаная сумка через плечо. Вместительная и стильная.",
+        image: "img/сумка.jpg",
+        category: "accessories",
+        badge: "Люкс"
     },
     {
         id: 6,
-        name: "Часы Elegance Pro",
-        price: 5299,
-        description: "Элегантные классические часы с сапфировым стеклом. Подчеркнут ваш стиль в деловой обстановке.",
-        image: "https://via.placeholder.com/400x400/10b981/ffffff?text=Часы+Elegance",
+        name: "Солнечные очки",
+        price: 2199,
+        description: "Стильные солнечные очки с UV-защитой. Подходят для любого сезона.",
+        image: "img/очки.jpg",
         category: "accessories",
-        badge: "Премиум"
+        badge: "Стиль"
     },
     {
         id: 7,
-        name: "Шорты Urban Style",
-        price: 2199,
-        description: "Стильные шорты для городского образа жизни. Комфортные и практичные для теплой погоды.",
-        image: "https://via.placeholder.com/400x400/f59e0b/ffffff?text=Шорты+Urban",
+        name: "Футболка Basic",
+        price: 899,
+        description: "Классическая футболка для повседневной носки. Отличное качество по доступной цене.",
+        image: "img/футболка.jpg",
         category: "clothing",
-        sizes: ["S", "M", "L", "XL"],
-        badge: "Лето 2024"
+        sizes: ["S", "M", "L"],
+        badge: "Выгодно"
     },
     {
         id: 8,
-        name: "Браслет Minimalist",
-        price: 899,
-        description: "Элегантный минималистичный браслет из нержавеющей стали. Подходит для ежедневной носки.",
-        image: "https://via.placeholder.com/400x400/8b5cf6/ffffff?text=Браслет+Minimal",
-        category: "accessories"
-    },
-    {
-        id: 9,
-        name: "Футболка Graphic Print",
-        price: 1599,
-        description: "Футболка с уникальным графическим принтом. Выразите свой стиль через искусство.",
-        image: "https://via.placeholder.com/400x400/6366f1/ffffff?text=Футболка+Graphic",
+        name: "Худи Oversize",
+        price: 3799,
+        description: "Модное худи оверсайз кроя. Создает расслабленный и стильный look.",
+        image: "img/худи.jpg",
         category: "clothing",
-        sizes: ["S", "M", "L", "XL"],
-        badge: "Арт-коллекция"
-    },
-    {
-        id: 10,
-        name: "Цепочка Silver Line",
-        price: 1899,
-        description: "Стильная серебряная цепочка с современным дизайном. Идеальное дополнение к любому образу.",
-        image: "https://via.placeholder.com/400x400/6b7280/ffffff?text=Цепочка+Silver",
-        category: "accessories",
-        badge: "Бестселлер"
-    },
-    {
-        id: 11,
-        name: "Худи Tech Fleece",
-        price: 4299,
-        description: "Инновационное худи из технологичного флиса. Легкое, теплое и стильное.",
-        image: "https://via.placeholder.com/400x400/ec4899/ffffff?text=Худи+Tech",
-        category: "clothing",
-        sizes: ["S", "M", "L", "XL"],
-        badge: "Технологии"
-    },
-    {
-        id: 12,
-        name: "Набор браслетов Modern",
-        price: 1299,
-        description: "Набор из трех стильных браслетов для создания многослойного образа.",
-        image: "https://via.placeholder.com/400x400/8b5cf6/ffffff?text=Браслеты+Set",
-        category: "accessories",
-        badge: "Комплект"
+        sizes: ["M", "L", "XL"],
+        badge: "Тренд"
     }
 ];
+
+// Корзина
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 // Функция для отображения товаров
 function displayProducts(productsToShow = products) {
@@ -140,7 +107,7 @@ function displayProducts(productsToShow = products) {
         productCard.innerHTML = `
             <div class="product-image-container">
                 <img src="${product.image}" alt="${product.name}" class="product-image" 
-                     onerror="this.src='https://via.placeholder.com/400x400/6366f1/ffffff?text=FashionStore'">
+                     onerror="this.src='https://via.placeholder.com/400x400/6366f1/ffffff?text=ShoshoShop'">
                 ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
             </div>
             <div class="product-name">${product.name}</div>
@@ -173,24 +140,17 @@ function showCategory(category) {
     const buttons = document.querySelectorAll('.category-btn');
     buttons.forEach(btn => {
         btn.classList.remove('active');
+        btn.style.transform = 'translateY(0)';
     });
     
-    // Находим кнопку, на которую нажали
-    let targetButton = event.target;
-    if (targetButton.tagName === 'SPAN') {
-        targetButton = targetButton.parentElement;
-    }
-    targetButton.classList.add('active');
+    event.target.classList.add('active');
+    event.target.style.transform = 'translateY(-2px)';
 
     let filteredProducts = products;
     if (category !== 'all') {
         filteredProducts = products.filter(product => product.category === category);
     }
 
-    // Обновляем статистику при переключении
-    updateCategoryStats();
-    
-    // Добавляем анимацию появления
     const container = document.getElementById('products-container');
     if (container) {
         container.classList.add('loading');
@@ -202,34 +162,36 @@ function showCategory(category) {
     }
 }
 
-// Функция обновления статистики категорий
-function updateCategoryStats() {
-    const allCount = products.length;
-    const clothingCount = products.filter(p => p.category === 'clothing').length;
-    const accessoriesCount = products.filter(p => p.category === 'accessories').length;
-    
-    const allCountElement = document.getElementById('all-count');
-    const clothingCountElement = document.getElementById('clothing-count');
-    const accessoriesCountElement = document.getElementById('accessories-count');
-    
-    if (allCountElement) allCountElement.textContent = allCount;
-    if (clothingCountElement) clothingCountElement.textContent = clothingCount;
-    if (accessoriesCountElement) accessoriesCountElement.textContent = accessoriesCount;
-}
-
-// Функция добавления в корзину с улучшенным UI
-function addToCart(productId) {
+// Функция добавления в корзину
+function addToCart(productId, quantity = 1) {
     const product = products.find(p => p.id === productId);
     if (product) {
+        const existingItem = cart.find(item => item.id === productId);
+        
+        if (existingItem) {
+            existingItem.quantity += quantity;
+        } else {
+            cart.push({
+                ...product,
+                quantity: quantity
+            });
+        }
+        
+        // Сохраняем в localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        // Обновляем счетчик корзины
+        updateCartCounter();
+        
+        // Анимация кнопки
         const button = event.target;
         const originalText = button.innerHTML;
         
-        // Анимация добавления
         button.innerHTML = '✅ Добавлено!';
         button.style.background = 'var(--success)';
         button.disabled = true;
         
-        // Создаем всплывающее уведомление
+        // Показываем уведомление
         showNotification(`"${product.name}" добавлен в корзину!`);
         
         setTimeout(() => {
@@ -237,6 +199,16 @@ function addToCart(productId) {
             button.style.background = '';
             button.disabled = false;
         }, 2000);
+    }
+}
+
+// Функция обновления счетчика корзины
+function updateCartCounter() {
+    const cartCounter = document.getElementById('cart-counter');
+    if (cartCounter) {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCounter.textContent = totalItems;
+        cartCounter.style.display = totalItems > 0 ? 'flex' : 'none';
     }
 }
 
@@ -265,58 +237,123 @@ function showNotification(message) {
     }, 3000);
 }
 
+// Функция отображения корзины
+function displayCart() {
+    const cartContainer = document.getElementById('cart-container');
+    const cartTotal = document.getElementById('cart-total');
+    const emptyCart = document.getElementById('empty-cart');
+    const cartItems = document.getElementById('cart-items');
+    
+    if (!cartContainer) return;
+    
+    if (cart.length === 0) {
+        emptyCart.style.display = 'block';
+        cartItems.style.display = 'none';
+        return;
+    }
+    
+    emptyCart.style.display = 'none';
+    cartItems.style.display = 'block';
+    
+    cartItems.innerHTML = '';
+    let total = 0;
+    
+    cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = `
+            <div class="cart-item-image">
+                <img src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/100x100/6366f1/ffffff?text=ShoshoShop'">
+            </div>
+            <div class="cart-item-details">
+                <h3>${item.name}</h3>
+                <p class="cart-item-price">${item.price.toLocaleString()} ₽ × ${item.quantity}</p>
+                ${item.sizes ? `<p class="cart-item-size">Размер: ${item.sizes[0]}</p>` : ''}
+            </div>
+            <div class="cart-item-total">
+                <span>${itemTotal.toLocaleString()} ₽</span>
+            </div>
+            <div class="cart-item-actions">
+                <div class="quantity-controls">
+                    <button onclick="updateQuantity(${item.id}, -1)">-</button>
+                    <span>${item.quantity}</span>
+                    <button onclick="updateQuantity(${item.id}, 1)">+</button>
+                </div>
+                <button class="remove-btn" onclick="removeFromCart(${item.id})">
+                    🗑️ Удалить
+                </button>
+            </div>
+        `;
+        
+        cartItems.appendChild(cartItem);
+    });
+    
+    cartTotal.textContent = total.toLocaleString();
+}
+
+// Функция обновления количества товара
+function updateQuantity(productId, change) {
+    const item = cart.find(item => item.id === productId);
+    if (item) {
+        item.quantity += change;
+        
+        if (item.quantity <= 0) {
+            removeFromCart(productId);
+        } else {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+            updateCartCounter();
+        }
+    }
+}
+
+// Функция удаления из корзины
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    displayCart();
+    updateCartCounter();
+    showNotification('Товар удален из корзины');
+}
+
+// Функция очистки корзины
+function clearCart() {
+    cart = [];
+    localStorage.setItem('cart', JSON.stringify(cart));
+    displayCart();
+    updateCartCounter();
+    showNotification('Корзина очищена');
+}
+
+// Функция оформления заказа
+function checkout() {
+    if (cart.length === 0) {
+        showNotification('Корзина пуста!');
+        return;
+    }
+    
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    showNotification(`Заказ оформлен! Сумма: ${total.toLocaleString()} ₽`);
+    clearCart();
+}
+
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
-    // Инициализируем кнопки категорий
-    const categoryButtons = document.querySelectorAll('.category-btn');
-    categoryButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const category = this.getAttribute('onclick').match(/'([^']+)'/)[1];
-            showCategory(category);
-        });
-    });
-
+    // Инициализация счетчика корзины
+    updateCartCounter();
+    
+    // Отображение товаров на странице каталога
     if (document.getElementById('products-container')) {
-        // Обновляем статистику
-        updateCategoryStats();
-        
-        // Задержка для плавного появления
         setTimeout(() => {
             displayProducts();
         }, 200);
     }
+    
+    // Отображение корзины на странице корзины
+    if (document.getElementById('cart-container')) {
+        displayCart();
+    }
 });
-
-// Альтернативная функция для показа категории (на случай проблем с event)
-function filterCategory(category) {
-    const buttons = document.querySelectorAll('.category-btn');
-    buttons.forEach(btn => {
-        btn.classList.remove('active');
-    });
-    
-    // Активируем правильную кнопку
-    if (category === 'all') {
-        document.querySelector('.category-btn[onclick*="all"]').classList.add('active');
-    } else if (category === 'clothing') {
-        document.querySelector('.category-btn[onclick*="clothing"]').classList.add('active');
-    } else if (category === 'accessories') {
-        document.querySelector('.category-btn[onclick*="accessories"]').classList.add('active');
-    }
-
-    let filteredProducts = products;
-    if (category !== 'all') {
-        filteredProducts = products.filter(product => product.category === category);
-    }
-
-    updateCategoryStats();
-    
-    const container = document.getElementById('products-container');
-    if (container) {
-        container.classList.add('loading');
-        
-        setTimeout(() => {
-            displayProducts(filteredProducts);
-            container.classList.remove('loading');
-        }, 300);
-    }
-}
