@@ -8,9 +8,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Telegram Web App SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <nav class="nav-header">
+    <!-- Навигация для браузера -->
+    <nav class="nav-header" id="browser-nav">
         <div class="nav-container">
             <a href="index.html" class="logo">🛍️ ShoshoShop</a>
             <div class="nav-links">
@@ -37,6 +41,12 @@
         </div>
     </div>
 
+    <!-- Основная кнопка для Telegram -->
+    <button class="tg-main-button" id="tg-main-button" style="display: none;">
+        🛍️ Перейти в каталог
+    </button>
+
     <script src="script.js"></script>
+    <script src="telegram.js"></script>
 </body>
 </html>
