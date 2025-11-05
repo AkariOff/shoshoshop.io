@@ -3,16 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShoShoShop-Магазин стильной одежды и аксессуаров</title>
+    <title>ShoshoShop - Магазин стильной одежды и аксессуаров</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="welcome-container">
+    <nav class="nav-header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">🛍️ ShoshoShop</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="catalog.html" class="nav-link">Каталог</a>
+                <a href="cart.html" class="nav-link cart-link">
+                    Корзина
+                    <span id="cart-counter" class="cart-counter">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="welcome-container" style="margin-top: 80px;">
         <div class="welcome-content">
-            <h1>🌟 ShoShoShop</h1>
+            <h1>🌟 ShoshoShop</h1>
             <p>Откройте для себя мир стиля и комфорта. Эксклюзивная коллекция одежды и аксессуаров по доступным ценам</p>
             <a href="catalog.html" class="cta-button">
                 🛍️ Перейти к покупкам
@@ -22,5 +36,7 @@
             </a>
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
