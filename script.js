@@ -357,3 +357,118 @@ document.addEventListener('DOMContentLoaded', function() {
         displayCart();
     }
 });
+// Добавьте эти функции в существующий script.js
+
+// Функция для обмена данными с Telegram
+function shareProduct(product) {
+    if (tgApp && tgApp.tg) {
+        const shareText = `🛍️ ${product.name}\n💵 Цена: ${product.price.toLocaleString()} ₽\n📝 ${product.description}`;
+        
+        tgApp.tg.showPopup({
+            title: 'Поделиться товаром',
+            message: 'Хотите поделиться этим товаром?',
+            buttons: [
+                {
+                    id: 'share',
+                    type: 'default',
+                    text: '📤 Поделиться'
+                },
+                {
+                    id: 'cancel',
+                    type: 'cancel'
+                }
+            ]
+        }, (buttonId) => {
+            if (buttonId === 'share') {
+                // В реальном приложении здесь будет логика分享
+                tgApp.showNotification('Товар готов к отправке!');
+            }
+        });
+    }
+}
+
+// Функция быстрого заказа
+function quickOrder(productId) {
+    const product = products.find(p => p.id === productId);
+    if (product) {
+        addToCart(productId, 1);
+        
+        if (tgApp && tgApp.tg) {
+            // Показываем подтверждение быстрого заказа
+            setTimeout(() => {
+                tgApp.tg.showConfirm(
+                    `Быстрый заказ: ${product.name}`,
+                    (confirmed) => {
+                        if (confirmed) {
+                            window.location.href = 'cart.html';
+                        }
+                    }
+                );
+            }, 1000);
+        }
+    }
+}
+
+// Адаптированная функция показа уведомлений
+function showNotification(message) {
+    if (tgApp && tgApp.tg) {
+        tgApp.showNotification(message);
+    } else {
+        // Стандартная реализация для браузера
+        const notification = document.createElement('div');
+        notification.className = 'tg-notification';
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            z-index: 1002;
+            backdrop-filter: blur(10px);
+            animation: slideDown 0.3s ease-out;
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+}
+
+// Функция для получения геолокации (для доставки)
+function getLocation() {
+    return new Promise((resolve, reject) => {
+        if (tgApp && tgApp.tg) {
+            // В Telegram можно получить геолокацию
+            tgApp.tg.showPopup({
+                title: 'Геолокация',
+                message: 'Разрешить доступ к вашей геолокации для расчета доставки?',
+                buttons: [
+                    { id: 'allow', type: 'default', text: 'Разрешить' },
+                    { id: 'deny', type: 'cancel', text: 'Отказаться' }
+                ]
+            }, (buttonId) => {
+                if (buttonId === 'allow') {
+                    resolve('location_approved');
+                } else {
+                    reject('location_denied');
+                }
+            });
+        } else {
+            // В браузере используем стандартный API
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => resolve(position),
+                    error => reject(error)
+                );
+            } else {
+                reject('geolocation_not_supported');
+            }
+        }
+    });
+}
