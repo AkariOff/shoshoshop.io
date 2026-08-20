@@ -1,4 +1,10 @@
-// Данные товаров
+// ==========================================
+// ShoshoShop - Основной скрипт
+// ==========================================
+
+// ==========================================
+// 1. ДАННЫЕ ТОВАРОВ
+// ==========================================
 const products = [
     {
         id: 1,
@@ -79,10 +85,38 @@ const products = [
     }
 ];
 
-// Корзина
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
+// ==========================================
+// 2. КОРЗИНА (с безопасной загрузкой)
+// ==========================================
+function loadCart() {
+    try {
+        const saved = localStorage.getItem('cart');
+        return saved ? JSON.parse(saved) : [];
+    } catch (e) {
+        console.error('Ошибка загрузки корзины:', e);
+        return [];
+    }
+}
 
-// Функция для отображения товаров
+function saveCart() {
+    try {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    } catch (e) {
+        console.error('Ошибка сохранения корзины:', e);
+    }
+}
+
+let cart = loadCart();
+
+// ==========================================
+// 3. ОТОБРАЖЕНИЕ ТОВАРОВ (с экранированием HTML)
+// ==========================================
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 function displayProducts(productsToShow = products) {
     const container = document.getElementById('products-container');
     if (!container) return;
@@ -106,22 +140,24 @@ function displayProducts(productsToShow = products) {
 
         productCard.innerHTML = `
             <div class="product-image-container">
-                <img src="${product.image}" alt="${product.name}" class="product-image" 
+                <img src="${escapeHtml(product.image)}" 
+                     alt="${escapeHtml(product.name)}" 
+                     class="product-image"
                      onerror="this.src='https://via.placeholder.com/400x400/6366f1/ffffff?text=ShoshoShop'">
-                ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                ${product.badge ? `<div class="product-badge">${escapeHtml(product.badge)}</div>` : ''}
             </div>
-            <div class="product-name">${product.name}</div>
+            <div class="product-name">${escapeHtml(product.name)}</div>
             <div class="product-price">${product.price.toLocaleString()} ₽</div>
-            <div class="product-description">${product.description}</div>
-            ${product.sizes ? `
+            <div class="product-description">${escapeHtml(product.description)}</div>
+            ${product.sizes && product.sizes.length ? `
                 <div class="product-sizes">
                     <span class="size-label">Доступные размеры:</span>
                     <div class="size-badges">
-                        ${product.sizes.map(size => `<span class="size-badge">${size}</span>`).join('')}
+                        ${product.sizes.map(size => `<span class="size-badge">${escapeHtml(size)}</span>`).join('')}
                     </div>
                 </div>
             ` : ''}
-            <button class="add-to-cart" onclick="addToCart(${product.id})">
+            <button class="add-to-cart" data-product-id="${product.id}">
                 🛒 Добавить в корзину
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="9" cy="21" r="1"></circle>
@@ -131,344 +167,30 @@ function displayProducts(productsToShow = products) {
             </button>
         `;
 
+        // ✅ Добавление обработчика через JS (не inline onclick)
+        const button = productCard.querySelector('.add-to-cart');
+        button.addEventListener('click', function() {
+            addToCart(product.id, 1, this);
+        });
+
         container.appendChild(productCard);
     });
 }
 
-// Функция фильтрации по категориям
-function showCategory(category) {
+// ==========================================
+// 4. ФИЛЬТРАЦИЯ ПО КАТЕГОРИЯМ
+// ==========================================
+function showCategory(category, clickedBtn) {
+    // ✅ Используем переданную кнопку вместо event.target
     const buttons = document.querySelectorAll('.category-btn');
     buttons.forEach(btn => {
         btn.classList.remove('active');
         btn.style.transform = 'translateY(0)';
     });
     
-    event.target.classList.add('active');
-    event.target.style.transform = 'translateY(-2px)';
-
-    let filteredProducts = products;
-    if (category !== 'all') {
-        filteredProducts = products.filter(product => product.category === category);
+    if (clickedBtn) {
+        clickedBtn.classList.add('active');
+        clickedBtn.style.transform = 'translateY(-2px)';
     }
 
-    const container = document.getElementById('products-container');
-    if (container) {
-        container.classList.add('loading');
-        
-        setTimeout(() => {
-            displayProducts(filteredProducts);
-            container.classList.remove('loading');
-        }, 300);
-    }
-}
-
-// Функция добавления в корзину
-function addToCart(productId, quantity = 1) {
-    const product = products.find(p => p.id === productId);
-    if (product) {
-        const existingItem = cart.find(item => item.id === productId);
-        
-        if (existingItem) {
-            existingItem.quantity += quantity;
-        } else {
-            cart.push({
-                ...product,
-                quantity: quantity
-            });
-        }
-        
-        // Сохраняем в localStorage
-        localStorage.setItem('cart', JSON.stringify(cart));
-        
-        // Обновляем счетчик корзины
-        updateCartCounter();
-        
-        // Анимация кнопки
-        const button = event.target;
-        const originalText = button.innerHTML;
-        
-        button.innerHTML = '✅ Добавлено!';
-        button.style.background = 'var(--success)';
-        button.disabled = true;
-        
-        // Показываем уведомление
-        showNotification(`"${product.name}" добавлен в корзину!`);
-        
-        setTimeout(() => {
-            button.innerHTML = originalText;
-            button.style.background = '';
-            button.disabled = false;
-        }, 2000);
-    }
-}
-
-// Функция обновления счетчика корзины
-function updateCartCounter() {
-    const cartCounter = document.getElementById('cart-counter');
-    if (cartCounter) {
-        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        cartCounter.textContent = totalItems;
-        cartCounter.style.display = totalItems > 0 ? 'flex' : 'none';
-    }
-}
-
-// Функция показа уведомлений
-function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: var(--success);
-        color: white;
-        padding: 15px 25px;
-        border-radius: 10px;
-        box-shadow: var(--shadow-lg);
-        z-index: 1000;
-        animation: slideIn 0.3s ease-out;
-        font-weight: 500;
-    `;
-    notification.textContent = message;
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.remove();
-    }, 3000);
-}
-
-// Функция отображения корзины
-function displayCart() {
-    const cartContainer = document.getElementById('cart-container');
-    const cartTotal = document.getElementById('cart-total');
-    const emptyCart = document.getElementById('empty-cart');
-    const cartItems = document.getElementById('cart-items');
-    
-    if (!cartContainer) return;
-    
-    if (cart.length === 0) {
-        emptyCart.style.display = 'block';
-        cartItems.style.display = 'none';
-        return;
-    }
-    
-    emptyCart.style.display = 'none';
-    cartItems.style.display = 'block';
-    
-    cartItems.innerHTML = '';
-    let total = 0;
-    
-    cart.forEach(item => {
-        const itemTotal = item.price * item.quantity;
-        total += itemTotal;
-        
-        const cartItem = document.createElement('div');
-        cartItem.className = 'cart-item';
-        cartItem.innerHTML = `
-            <div class="cart-item-image">
-                <img src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/100x100/6366f1/ffffff?text=ShoshoShop'">
-            </div>
-            <div class="cart-item-details">
-                <h3>${item.name}</h3>
-                <p class="cart-item-price">${item.price.toLocaleString()} ₽ × ${item.quantity}</p>
-                ${item.sizes ? `<p class="cart-item-size">Размер: ${item.sizes[0]}</p>` : ''}
-            </div>
-            <div class="cart-item-total">
-                <span>${itemTotal.toLocaleString()} ₽</span>
-            </div>
-            <div class="cart-item-actions">
-                <div class="quantity-controls">
-                    <button onclick="updateQuantity(${item.id}, -1)">-</button>
-                    <span>${item.quantity}</span>
-                    <button onclick="updateQuantity(${item.id}, 1)">+</button>
-                </div>
-                <button class="remove-btn" onclick="removeFromCart(${item.id})">
-                    🗑️ Удалить
-                </button>
-            </div>
-        `;
-        
-        cartItems.appendChild(cartItem);
-    });
-    
-    cartTotal.textContent = total.toLocaleString();
-}
-
-// Функция обновления количества товара
-function updateQuantity(productId, change) {
-    const item = cart.find(item => item.id === productId);
-    if (item) {
-        item.quantity += change;
-        
-        if (item.quantity <= 0) {
-            removeFromCart(productId);
-        } else {
-            localStorage.setItem('cart', JSON.stringify(cart));
-            displayCart();
-            updateCartCounter();
-        }
-    }
-}
-
-// Функция удаления из корзины
-function removeFromCart(productId) {
-    cart = cart.filter(item => item.id !== productId);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    displayCart();
-    updateCartCounter();
-    showNotification('Товар удален из корзины');
-}
-
-// Функция очистки корзины
-function clearCart() {
-    cart = [];
-    localStorage.setItem('cart', JSON.stringify(cart));
-    displayCart();
-    updateCartCounter();
-    showNotification('Корзина очищена');
-}
-
-// Функция оформления заказа
-function checkout() {
-    if (cart.length === 0) {
-        showNotification('Корзина пуста!');
-        return;
-    }
-    
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    showNotification(`Заказ оформлен! Сумма: ${total.toLocaleString()} ₽`);
-    clearCart();
-}
-
-// Инициализация при загрузке страницы
-document.addEventListener('DOMContentLoaded', function() {
-    // Инициализация счетчика корзины
-    updateCartCounter();
-    
-    // Отображение товаров на странице каталога
-    if (document.getElementById('products-container')) {
-        setTimeout(() => {
-            displayProducts();
-        }, 200);
-    }
-    
-    // Отображение корзины на странице корзины
-    if (document.getElementById('cart-container')) {
-        displayCart();
-    }
-});
-// Добавьте эти функции в существующий script.js
-
-// Функция для обмена данными с Telegram
-function shareProduct(product) {
-    if (tgApp && tgApp.tg) {
-        const shareText = `🛍️ ${product.name}\n💵 Цена: ${product.price.toLocaleString()} ₽\n📝 ${product.description}`;
-        
-        tgApp.tg.showPopup({
-            title: 'Поделиться товаром',
-            message: 'Хотите поделиться этим товаром?',
-            buttons: [
-                {
-                    id: 'share',
-                    type: 'default',
-                    text: '📤 Поделиться'
-                },
-                {
-                    id: 'cancel',
-                    type: 'cancel'
-                }
-            ]
-        }, (buttonId) => {
-            if (buttonId === 'share') {
-                // В реальном приложении здесь будет логика分享
-                tgApp.showNotification('Товар готов к отправке!');
-            }
-        });
-    }
-}
-
-// Функция быстрого заказа
-function quickOrder(productId) {
-    const product = products.find(p => p.id === productId);
-    if (product) {
-        addToCart(productId, 1);
-        
-        if (tgApp && tgApp.tg) {
-            // Показываем подтверждение быстрого заказа
-            setTimeout(() => {
-                tgApp.tg.showConfirm(
-                    `Быстрый заказ: ${product.name}`,
-                    (confirmed) => {
-                        if (confirmed) {
-                            window.location.href = 'cart.html';
-                        }
-                    }
-                );
-            }, 1000);
-        }
-    }
-}
-
-// Адаптированная функция показа уведомлений
-function showNotification(message) {
-    if (tgApp && tgApp.tg) {
-        tgApp.showNotification(message);
-    } else {
-        // Стандартная реализация для браузера
-        const notification = document.createElement('div');
-        notification.className = 'tg-notification';
-        notification.textContent = message;
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 25px;
-            z-index: 1002;
-            backdrop-filter: blur(10px);
-            animation: slideDown 0.3s ease-out;
-        `;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.remove();
-        }, 3000);
-    }
-}
-
-// Функция для получения геолокации (для доставки)
-function getLocation() {
-    return new Promise((resolve, reject) => {
-        if (tgApp && tgApp.tg) {
-            // В Telegram можно получить геолокацию
-            tgApp.tg.showPopup({
-                title: 'Геолокация',
-                message: 'Разрешить доступ к вашей геолокации для расчета доставки?',
-                buttons: [
-                    { id: 'allow', type: 'default', text: 'Разрешить' },
-                    { id: 'deny', type: 'cancel', text: 'Отказаться' }
-                ]
-            }, (buttonId) => {
-                if (buttonId === 'allow') {
-                    resolve('location_approved');
-                } else {
-                    reject('location_denied');
-                }
-            });
-        } else {
-            // В браузере используем стандартный API
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    position => resolve(position),
-                    error => reject(error)
-                );
-            } else {
-                reject('geolocation_not_supported');
-            }
-        }
-    });
-}
+    let filteredProducts = products
