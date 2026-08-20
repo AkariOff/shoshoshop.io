@@ -8,75 +8,73 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Telegram Web App SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <!-- Навигация для браузера -->
+    <!-- Навигация (скрывается в Telegram) -->
     <nav class="nav-header" id="browser-nav">
         <div class="nav-container">
             <a href="index.html" class="logo">🛍️ ShoshoShop</a>
             <div class="nav-links">
                 <a href="index.html" class="nav-link">Главная</a>
                 <a href="catalog.html" class="nav-link">Каталог</a>
-                <a href="cart.html" class="nav-link cart-link">
+                <a href="cart.html" class="nav-link cart-link" aria-label="Корзина">
                     Корзина
-                    <span id="cart-counter" class="cart-counter">0</span>
+                    <span id="cart-counter" class="cart-counter" aria-live="polite">0</span>
                 </a>
             </div>
         </div>
     </nav>
 
-    <div class="container tg-container">
-        <div class="header">
+    <main class="container tg-container">
+        <header class="header">
             <h1>🛒 Корзина покупок</h1>
             <p>Товары, которые вы выбрали</p>
             <div class="header-actions">
                 <a href="index.html" class="back-link">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <path d="M19 12H5M12 19l-7-7 7-7"/>
                     </svg>
                     На главную
                 </a>
-                <a href="catalog.html" class="cta-button">
-                    🛍️ Продолжить покупки
-                </a>
+                <a href="catalog.html" class="cta-button">🛍️ Продолжить покупки</a>
             </div>
-        </div>
+        </header>
 
-        <div id="cart-container">
+        <section id="cart-container" aria-live="polite">
+            <!-- Пустая корзина (показывается по умолчанию) -->
             <div id="empty-cart" class="empty-cart">
-                <div class="empty-cart-icon">🛒</div>
+                <div class="empty-cart-icon" aria-hidden="true">🛒</div>
                 <h2>Ваша корзина пуста</h2>
                 <p>Добавьте товары из каталога, чтобы сделать заказ</p>
                 <a href="catalog.html" class="cta-button">Перейти в каталог</a>
             </div>
 
-            <div id="cart-items" class="cart-items">
-                <div class="cart-items-list" id="cart-items-list">
-                    <!-- Товары будут добавляться через JavaScript -->
-                </div>
-                
+            <!-- Список товаров (скрыт по умолчанию) -->
+            <div id="cart-items" class="cart-items" style="display: none;">
+                <ul class="cart-items-list" id="cart-items-list">
+                    <!-- Товары добавляются через JS -->
+                </ul>
+
                 <div class="cart-summary tg-cart-summary">
                     <div class="cart-total">
                         <h3>Итого: <span id="cart-total">0</span> ₽</h3>
                     </div>
                     <div class="cart-actions">
-                        <button class="clear-cart-btn" onclick="clearCart()">
+                        <button type="button" class="clear-cart-btn" onclick="clearCart()">
                             🗑️ Очистить корзину
                         </button>
-                        <button class="checkout-btn" onclick="checkout()">
+                        <button type="button" class="checkout-btn" onclick="checkout()">
                             💳 Оформить заказ
                         </button>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
-    <!-- Кнопка оформления заказа для Telegram -->
-    <button class="tg-main-button" id="tg-checkout-button" style="display: none;">
+    <!-- Кнопка оформления для Telegram -->
+    <button type="button" class="tg-main-button" id="tg-checkout-button" style="display: none;">
         💳 Оформить заказ
     </button>
 
