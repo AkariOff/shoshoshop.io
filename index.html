@@ -4,45 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShoshoShop - Магазин стильной одежды и аксессуаров</title>
+    <meta name="description" content="ShoshoShop - эксклюзивная коллекция стильной одежды и аксессуаров по доступным ценам">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Telegram Web App SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <!-- Навигация для браузера -->
+    <!-- Навигация для браузера (скрывается в Telegram) -->
     <nav class="nav-header" id="browser-nav">
         <div class="nav-container">
             <a href="index.html" class="logo">🛍️ ShoshoShop</a>
             <div class="nav-links">
-                <a href="index.html" class="nav-link">Главная</a>
+                <a href="index.html" class="nav-link" aria-current="page">Главная</a>
                 <a href="catalog.html" class="nav-link">Каталог</a>
-                <a href="cart.html" class="nav-link cart-link">
+                <a href="cart.html" class="nav-link cart-link" aria-label="Корзина">
                     Корзина
-                    <span id="cart-counter" class="cart-counter">0</span>
+                    <span id="cart-counter" class="cart-counter" aria-live="polite">0</span>
                 </a>
             </div>
         </div>
     </nav>
 
-    <div class="welcome-container" style="margin-top: 80px;">
-        <div class="welcome-content">
+    <main class="welcome-container">
+        <section class="welcome-content">
             <h1>🌟 ShoshoShop</h1>
             <p>Откройте для себя мир стиля и комфорта. Эксклюзивная коллекция одежды и аксессуаров по доступным ценам</p>
             <a href="catalog.html" class="cta-button">
                 🛍️ Перейти к покупкам
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
             </a>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <!-- Основная кнопка для Telegram -->
-    <button class="tg-main-button" id="tg-main-button" style="display: none;">
+    <button type="button" class="tg-main-button" id="tg-main-button" style="display: none;">
         🛍️ Перейти в каталог
     </button>
 
